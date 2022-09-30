@@ -20,6 +20,30 @@ if System.get_env("PHX_SERVER") do
   config :gilbert, GilbertWeb.Endpoint, server: true
 end
 
+# ## Configuring Slack API
+client_id =
+  System.get_env("SLACK_CLIENT_ID") ||
+    raise """
+    environment variable SLACK_CLIENT_ID is missing.
+    """
+
+client_secret =
+  System.get_env("SLACK_CLIENT_SECRET") ||
+    raise """
+    environment variable SLACK_CLIENT_SECRET is missing.
+    """
+
+signing_secret =
+  System.get_env("SLACK_SIGNING_SECRET") ||
+    raise """
+    environment variable SLACK_SIGNING_SECRET is missing.
+    """
+
+config :gilbert, :slack,
+  client_id: client_id,
+  client_secret: client_secret,
+  signing_secret: signing_secret
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||
