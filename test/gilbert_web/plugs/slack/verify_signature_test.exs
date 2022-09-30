@@ -11,6 +11,15 @@ defmodule GilbertWeb.Plugs.Slack.VerifySignatureTest do
     assert opts === [keys: [:private, :raw_body], now: nil]
   end
 
+  test "call/2 raises when `nil` is given for option `:now` and using an old request timestamp" do
+    assert_raise GilbertWeb.Plugs.Slack.VerifySignature.RequestExpiredError, fn ->
+      build_conn()
+      |> put_req_header("accept", "application/json")
+      |> put_req_header("x-slack-request-timestamp", "1664543944")
+      |> GilbertWeb.Plugs.Slack.VerifySignature.call(now: nil)
+    end
+  end
+
   test "call/2 raises when the request timestamp is more than 5 minutes after the current time" do
     assert_raise GilbertWeb.Plugs.Slack.VerifySignature.RequestExpiredError, fn ->
       build_conn()

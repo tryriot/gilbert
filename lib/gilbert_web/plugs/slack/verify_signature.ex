@@ -35,7 +35,7 @@ defmodule GilbertWeb.Plugs.Slack.VerifySignature do
   @impl true
   @spec call(Plug.Conn.t(), keyword) :: Plug.Conn.t()
   def call(conn, opts) do
-    now = Keyword.get(opts, :now, DateTime.now!("Etc/UTC"))
+    now = Keyword.get(opts, :now) || DateTime.now!("Etc/UTC")
 
     [request_timestamp | _] = Conn.get_req_header(conn, "x-slack-request-timestamp")
 
