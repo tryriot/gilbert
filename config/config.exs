@@ -16,7 +16,7 @@ config :gilbert, GilbertWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: GilbertWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Gilbert.PubSub,
-  live_view: [signing_salt: "WvdImt7v"]
+  live_view: [signing_salt: "uYNVD6/4NutkzKqddUZISei/n5wgEpyz"]
 
 # Configures the mailer
 #

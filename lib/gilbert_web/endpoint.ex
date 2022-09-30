@@ -7,7 +7,7 @@ defmodule GilbertWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_gilbert_key",
-    signing_salt: "xt/xkLuv"
+    signing_salt: "HCvK3MxvHbWQefEoTaXGfP7HsP76yw5M"
   ]
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
