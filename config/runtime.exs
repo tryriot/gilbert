@@ -39,24 +39,51 @@ signing_secret =
     environment variable SLACK_SIGNING_SECRET is missing.
     """
 
+bot_user_oauth_token =
+  System.get_env("SLACK_BOT_USER_OAUTH_TOKEN") ||
+    raise """
+    environment variable SLACK_BOT_USER_OAUTH_TOKEN is missing.
+    """
+
+support_channel = System.get_env("SLACK_SUPPORT_CHANNEL", "garbage")
+
 config :gilbert, :slack,
   client_id: client_id,
   client_secret: client_secret,
-  signing_secret: signing_secret
+  signing_secret: signing_secret,
+  bot_user_oauth_token: bot_user_oauth_token,
+  support_channel: support_channel
+
+config :slack, api_token: bot_user_oauth_token
 
 if config_env() == :prod do
-  database_url =
-    System.get_env("DATABASE_URL") ||
+  # database_url =
+  #   System.get_env("DATABASE_URL") ||
+  #     raise """
+  #     environment variable DATABASE_URL is missing.
+  #     For example: ecto://USER:PASS@HOST/DATABASE
+  #     """
+
+  # maybe_ipv6 = if System.get_env("ECTO_IPV6"), do: [:inet6], else: []
+
+  # config :gilbert, Gilbert.Repo,
+  #   # ssl: true,
+  #   url: database_url,
+  #   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  #   socket_options: maybe_ipv6
+
+  platform_database_url =
+    System.get_env("PLATFORM_DATABASE_URL") ||
       raise """
-      environment variable DATABASE_URL is missing.
+      environment variable PLATFORM_DATABASE_URL is missing.
       For example: ecto://USER:PASS@HOST/DATABASE
       """
 
   maybe_ipv6 = if System.get_env("ECTO_IPV6"), do: [:inet6], else: []
 
-  config :gilbert, Gilbert.Repo,
+  config :gilbert, Gilbert.Platform.Repo,
     # ssl: true,
-    url: database_url,
+    url: platform_database_url,
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
     socket_options: maybe_ipv6
 

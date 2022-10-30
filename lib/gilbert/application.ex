@@ -9,7 +9,8 @@ defmodule Gilbert.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      Gilbert.Repo,
+      # Gilbert.Repo,
+      Gilbert.Platform.Repo,
       # Start the Telemetry supervisor
       GilbertWeb.Telemetry,
       # Start the PubSub system

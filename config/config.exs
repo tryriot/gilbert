@@ -8,7 +8,8 @@
 import Config
 
 config :gilbert,
-  ecto_repos: [Gilbert.Repo],
+  # ecto_repos: [Gilbert.Repo],
+  ecto_repos: [Gilbert.Platform.Repo],
   generators: [binary_id: true]
 
 # Configures the endpoint

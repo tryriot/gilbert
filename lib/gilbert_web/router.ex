@@ -14,10 +14,21 @@ defmodule GilbertWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :slack do
+    plug :accepts, ["json"]
+    plug GilbertWeb.Plugs.Slack.VerifySignature, keys: [:private, :raw_body]
+    plug GilbertWeb.Plugs.Slack.DecodePayload
+  end
+
   scope "/", GilbertWeb do
     pipe_through :browser
+  end
 
-    get "/", PageController, :index
+  scope "/slack", GilbertWeb do
+    pipe_through :slack
+
+    post "/interactive-endpoint", Slack.InteractivityController, :index
+    post "/options-load-endpoint", Slack.InteractivityController, :options_load
   end
 
   # Other scopes may use custom stacks.

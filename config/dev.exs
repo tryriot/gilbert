@@ -1,11 +1,19 @@
 import Config
 
 # Configure your database
-config :gilbert, Gilbert.Repo,
+# config :gilbert, Gilbert.Repo,
+#   username: "postgres",
+#   password: "postgres",
+#   hostname: "localhost",
+#   database: "gilbert_dev",
+#   stacktrace: true,
+#   show_sensitive_data_on_connection_error: true,
+#   pool_size: 10
+config :gilbert, Gilbert.Platform.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "postgrespassword",
   hostname: "localhost",
-  database: "gilbert_dev",
+  database: "main",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

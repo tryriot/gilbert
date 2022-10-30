@@ -18,7 +18,7 @@ defmodule Gilbert.DataCase do
 
   using do
     quote do
-      alias Gilbert.Repo
+      # alias Gilbert.Repo
 
       import Ecto
       import Ecto.Changeset
@@ -35,9 +35,9 @@ defmodule Gilbert.DataCase do
   @doc """
   Sets up the sandbox based on the test tags.
   """
-  def setup_sandbox(tags) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Gilbert.Repo, shared: not tags[:async])
-    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
+  def setup_sandbox(_tags) do
+    # pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Gilbert.Repo, shared: not tags[:async])
+    # on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
   end
 
   @doc """

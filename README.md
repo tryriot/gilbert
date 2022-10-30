@@ -1,19 +1,36 @@
 # Gilbert
 
-To start your Phoenix server:
+## Slack application configuration
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+Create a Slack app.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Copy the file `.env.example` and name it `.env`.
+Copy the values of the Client ID, Client Secret and Signing Secret in the `.env` file.
+Copy the bot user OAuth token from section `Install App` inside the `.env` file.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+### Features
 
-## Learn more
+#### Interactivity & Shortcuts
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+Enable the `interactivity` toggle.
+
+Fill the value of the field `Request URL` (e.g. `https://<domain to use>/slack/interactive-endpoint`).
+
+In section `Select Menus`, fill the value of the field `Options Load URL` (e.g. `https://<domain to use>/slack/options-load-endpoint`).
+
+In section `Shortcuts`, create a new shortcut:
+
+- Name: `Request support`
+- Description: `Request support from the tech team`
+- Callback ID: `request_support`
+
+#### OAuth & Permissions
+
+In section `Scopes`, make sure the following scopes are applied for `Bot Token Scopes`:
+
+- `chat:write`
+- `chat:write.customize`
+- `commands`
+- `users:read`
+
+You will also need to add the application in the channel it is supposed to send messages using the command `/invite @<name of the bot>`.
