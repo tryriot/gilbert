@@ -21,7 +21,9 @@ defmodule GilbertWeb.Router do
   end
 
   scope "/", GilbertWeb do
-    pipe_through :browser
+    pipe_through :api
+
+    get "/health", Health.Controller, :index
   end
 
   scope "/slack", GilbertWeb do
